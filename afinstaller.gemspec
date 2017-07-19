@@ -1,7 +1,8 @@
 # coding: utf-8
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "afinstaller/version"
+# lib = File.expand_path("../lib", __FILE__)
+# $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+# require "afinstaller/version"
+require File.expand_path("../lib/afinstaller/version", __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name          = "afinstaller"
@@ -12,7 +13,6 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{This is PW's AF installer}
   spec.description   = %q{This is PW's AF installer}
   spec.homepage      = "https://rubygems.org/gems/afinstaller"
-  spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -22,12 +22,6 @@ Gem::Specification.new do |spec|
     raise "RubyGems 2.0 or newer is required to protect against " \
       "public gem pushes."
   end
-
-  # spec.files         = ["lib/afinstaller.rb", "lib/afinstaller/cli.rb", "config/environment.rb"]
-  spec.files        = `git ls-files`.split("\n")
-  # spec.executables   << 'afinstaller'
-  spec.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
-  spec.require_path = 'lib'
 
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"
@@ -40,4 +34,12 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "activesupport"
   spec.add_dependency "thor"
+  spec.add_dependency "cocoapods"
+  spec.add_dependency "xcpretty"
+
+  # spec.files         = ["lib/afinstaller.rb", "lib/afinstaller/cli.rb", "config/environment.rb"]
+  spec.files        = `git ls-files`.split("\n")
+  spec.executables   << 'afinstaller'
+  # spec.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
+  spec.require_path = 'lib'
 end

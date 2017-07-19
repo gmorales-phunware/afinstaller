@@ -1,24 +1,25 @@
 require 'thor'
 require 'afinstaller'
+require 'afinstaller/installers/iOS/iOS'
+require 'afinstaller/installers/iOS/iOSBuild'
+require 'afinstaller/installers/Android/android'
+require 'afinstaller/installers/Android/androidBuild'
 
 module Afinstaller
   class CLI < Thor
-
-    def platform(name)
-      # puts Foodie::Food.portray(name)
-      puts Afinstaller::Platform.platform(name)
+    desc "portray ITEM", "Determines if a piece of food is gross or delicious"
+    method_option :build, :aliases => "-b", :desc => "Build project after cloning repo."
+    def iOS(version)
+      build_project = options[:build]
+      if build_project
+        puts "Building with -b flag"
+        Afinstaller::Installers::IOSBuild.start([version])
+      else
+        puts "Building without -b flag"
+        Afinstaller::Installers::IOS.start([version])
+      end
     end
 
-    def call
-      puts ""
-      puts "******** Latest Video Games and Reviews ********"
-      puts ""
-      self.start
-    end
-
-    def start
-      puts "Select a platform"
-    end
 
   end
 end

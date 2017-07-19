@@ -7,15 +7,10 @@
 # end
 
 require 'afinstaller'
-
-describe Afinstaller::Platform do
-  it "platform is ios" do
-    Afinstaller::Platform.platform("iOS").should eql("iOS!")
+describe Afinstaller::Installers::IOS do
+  it "ios is ios" do
+    # expect(Afinstaller::Installer.iOS("iOS")).to eql("iOS!")
+    # Afinstaller::Installers::IOS.start([version])
+    # expect(Afinstaller::Installers::IOS.iOS("4.5.0")).to eql("Correct!")
   end
 end
-
-
-# describe Foodie::Food do
-#   it "broccoli is gross" do
-#     Foodie::Food.portray("Broccoli").should eql("Gross!")
-#   end
