@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Gabe Morales"]
   spec.email         = ["gmorales@phunware.com"]
 
-  spec.summary       = %q{This is PW's AF installer}
-  spec.description   = %q{This is PW's AF installer}
+  spec.summary       = %q{PW's AF iOS and Android Command Line Tool.}
+  spec.description   = %q{Simply Ruby gem to install and build Out of the Box iOS or Android AF projects.}
   spec.homepage      = "https://rubygems.org/gems/afinstaller"
   spec.required_rubygems_version = ">= 2.0.0"
 
