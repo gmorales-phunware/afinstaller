@@ -1,5 +1,6 @@
 # require "afinstaller/version"
 require 'afinstaller/installers/iOS/iOS'
+require 'afinstaller/installers/Errors/error'
 require 'afinstaller/installers/iOS/iOSBuild'
 require 'afinstaller/installers/Android/android'
 require 'afinstaller/installers/Android/androidBuild'

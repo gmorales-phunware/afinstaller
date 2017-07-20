@@ -19,16 +19,18 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "nokogiri", ">= 0"
-  spec.add_development_dependency "pry", ">= 0"
+  # spec.add_development_dependency "nokogiri", ">= 0"
+  # spec.add_development_dependency "pry", ">= 0"
   spec.add_development_dependency "cucumber"
   spec.add_development_dependency "aruba"
 
-  spec.add_dependency "activesupport"
+
   spec.add_dependency "thor"
   spec.add_dependency "cocoapods"
-  spec.add_dependency "xcpretty"
+  spec.add_runtime_dependency "xcpretty"
   spec.add_dependency "rainbow", ">= 0"
+
+  spec.add_runtime_dependency(%q<activerecord>, ['>= 3.2', '< 6.0'])
 
   spec.files        = `git ls-files`.split("\n")
   spec.executables   << 'afinstaller'

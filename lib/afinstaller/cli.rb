@@ -1,5 +1,6 @@
 require 'thor'
 require 'afinstaller'
+require 'afinstaller/installers/Errors/error'
 require 'afinstaller/installers/iOS/iOS'
 require 'afinstaller/installers/iOS/iOSBuild'
 require 'afinstaller/installers/Android/android'
@@ -28,6 +29,11 @@ module Afinstaller
   LONGDESC
     def iOS(version)
       build_project = options[:build]
+      if version == "help"
+        error = "Incorrect comment. Please try afinstaller help iOS"
+        Afinstaller::Installers::Error.start([error])
+      end
+
       if build_project
         Afinstaller::Installers::IOSBuild.start([version])
       else
@@ -47,6 +53,10 @@ module Afinstaller
   LONGDESC
     def Android(version)
       build_project = options[:build]
+      if version == "help"
+        error = "Incorrect comment. Please try afinstaller help iOS"
+        Afinstaller::Installers::Error.start([error])
+      end
       if build_project
         Afinstaller::Installers::AndroidBuild.start([version])
       else
