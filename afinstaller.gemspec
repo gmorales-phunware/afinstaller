@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "xcpretty"
   spec.add_dependency "rainbow", ">= 0"
 
-  spec.add_runtime_dependency(%q<activerecord>, ['>= 3.2', '< 6.0'])
+  # spec.add_runtime_dependency(%q<activerecord>, ['>= 3.2', '< 6.0'])
 
   spec.files        = `git ls-files`.split("\n")
   spec.executables   << 'afinstaller'
