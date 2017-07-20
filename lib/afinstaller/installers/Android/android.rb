@@ -30,10 +30,6 @@ module Afinstaller
         puts Rainbow("== Moving to project folder ==").cyan
         FileUtils.cd('af-template-android', :verbose => false)
         puts Rainbow("== Folder is now af-template-android ==").magenta
-
-        puts Rainbow("== Attempting Gradle Clean ==").cyan
-        system! './gradlew clean :app:assemble$1Debug --parallel --daemon --configure-on-demand -PminSdk=21'
-        puts Rainbow("== Gradle successful ==").magenta
       end
 
       def open_project_folder

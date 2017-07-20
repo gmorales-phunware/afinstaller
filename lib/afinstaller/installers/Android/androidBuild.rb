@@ -10,27 +10,21 @@ module Afinstaller
 
       def clone_command
         v = "#{version}"
-        FileUtils::mkdir "AF#{version}-iOS" unless File.exists?("AF#{version}-iOS")
-        FileUtils.cd("AF#{version}-iOS", :verbose => false)
+        FileUtils::mkdir "AF#{version}-Android" unless File.exists?("AF#{version}-Android")
+        FileUtils.cd("AF#{version}-Android", :verbose => false)
         puts Rainbow("== Cloning Repo ==").cyan
-        system! 'git clone -b release/v'+v+' ssh://git@bitbucket.phunware.com:7999/af/af-template-ios.git' unless File.exist?('af-template-ios')
+        system! 'git clone -b v'+v+' ssh://git@bitbucket.phunware.com:7999/af/af-template-android.git' unless File.exist?('af-template-android')
         puts Rainbow("== Cloning Succeeded ==").magenta
       end
 
-      def pod_install_command
+      def setup_command
         puts Rainbow("== Moving to project folder ==").cyan
-        FileUtils.cd('af-template-ios', :verbose => false)
-        puts Rainbow("== Folder is now af-template-ios ==").magenta
+        FileUtils.cd('af-template-android', :verbose => false)
+        puts Rainbow("== Folder is now af-template-android ==").magenta
 
-        puts Rainbow("== Attempting to run pod install ==").cyan
-        system! 'pod install'
-        puts Rainbow("== Cocoapod installation completed ==").magenta
-      end
-
-      def build_attmept
-        puts Rainbow("== Attempting to build project ==").cyan
-        system! 'xcodebuild -scheme GenericAF4 -workspace GenericAF4.xcworkspace/ -sdk iphonesimulator build | xcpretty'
-        puts Rainbow("== Project built successfully ==").magenta
+        puts Rainbow("== Attempting Gradle Clean ==").cyan
+        system! './gradlew clean :app:assemble$1Debug --parallel --daemon --configure-on-demand -PminSdk=21'
+        puts Rainbow("== Gradle successful ==").magenta
       end
 
       def open_project_folder
