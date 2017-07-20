@@ -42,8 +42,6 @@ module Afinstaller
         puts Rainbow("== AF Installer process completed. Thank you ==").magenta
       end
 
-      private
-
     end
   end
 end
