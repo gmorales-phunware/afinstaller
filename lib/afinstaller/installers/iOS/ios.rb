@@ -3,10 +3,6 @@ require 'pathname'
 require 'fileutils'
 include FileUtils
 
-def system!(*args)
-  system(*args) || abort(''+red('\n== Command #{args} failed =="')+'')
-end
-
 module Afinstaller
   module Installers
     class IOS < Thor::Group
