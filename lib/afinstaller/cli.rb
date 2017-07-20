@@ -41,6 +41,7 @@ module Afinstaller
       end
     end
 
+    method_option :build, :aliases => "-b", :desc => "Build project after cloning repo."
     desc "Android [version]", "CLI Installer for AF Android "
     long_desc <<-LONGDESC
     `afinstaller Android [version]` will clone the AF Android repo with the version you specify. It will it will
@@ -57,6 +58,7 @@ module Afinstaller
         error = "Incorrect comment. Please try afinstaller help iOS"
         Afinstaller::Installers::Error.start([error])
       end
+      
       if build_project
         Afinstaller::Installers::AndroidBuild.start([version])
       else
