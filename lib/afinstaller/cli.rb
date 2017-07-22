@@ -5,6 +5,8 @@ require 'afinstaller/installers/iOS/iOS'
 require 'afinstaller/installers/iOS/iOSBuild'
 require 'afinstaller/installers/Android/android'
 require 'afinstaller/installers/Android/androidBuild'
+require 'afinstaller/installers/Resi/platform'
+require 'afinstaller/installers/Resi/platformBuild'
 
 def system!(*args)
   system(*args) || abort(''+red('\n== Command #{args} failed =="')+'')
@@ -85,12 +87,11 @@ module Afinstaller
     LONGDESC
     def Resi(platform, version)
       build_project = options[:build]
-      puts "#{platform} #{version}"
       if platform.downcase == "ios" || platform.downcase == "android"
         if build_project
-
+          Afinstaller::Installers::ResiPlatformBuild.start([version, platform])
         else
-          Afinstaller::Installers::ResiPlatform.start([platform, version])
+          Afinstaller::Installers::ResiPlatform.start([version, platform])
         end
       else
         error = "Incorrect Platform. Please try afinstaller Resi iOS [version]"

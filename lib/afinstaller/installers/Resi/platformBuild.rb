@@ -1,11 +1,6 @@
-require 'thor/group'
-require 'pathname'
-require 'fileutils'
-include FileUtils
-
 module Afinstaller
   module Installers
-    class ResiPlatform < Thor::Group
+    class ResiPlatformBuild < Thor::Group
       argument :version, :type => :string
       argument :platform, :type => :string
       include Thor::Actions
@@ -43,7 +38,30 @@ module Afinstaller
         else
           FileUtils.cd('resi-template-android', :verbose => false)
           puts Rainbow("== Folder is now resi-template-android ==").magenta
+          puts Rainbow("== Attempting Gradle Clean ==").cyan
+          system! './gradlew clean :app:assembleDebug --parallel --daemon --configure-on-demand -PminSdk=21'
+          puts Rainbow("== Gradle successful ==").magenta
         end
+        
+      rescue NoMethodError => e
+        puts Rainbow("== Something went wrong. Please try again. ==").red
+        exit 1
+
+      end
+
+      def build_attmept
+        puts Rainbow("== Attempting to build project ==").cyan
+        if platform.downcase == "ios"
+          system! 'xcodebuild -scheme GenericResi -workspace GenericResi.xcworkspace/ -sdk iphonesimulator build | xcpretty'
+        else
+          system! 'adb install -r app/build/outputs/apk/app-$1-debug.apk'
+          system! 'adb shell monkey -p com.phunware.appframework.sample.generic_template.$1 -c android.intent.category.LAUNCHER 1'
+        end
+        puts Rainbow("== Project built successfully ==").magenta
+
+      rescue NoMethodError => e
+        puts Rainbow("== Something went wrong. Please try again. ==").red
+        exit 1
       end
 
       def open_project_folder
