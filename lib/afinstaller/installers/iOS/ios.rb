@@ -30,6 +30,10 @@ module Afinstaller
         puts Rainbow("== Attempting to run pod install ==").cyan
         system! 'pod install'
         puts Rainbow("== Cocoapod installation completed ==").magenta
+
+      rescue NoMethodError => e
+        puts Rainbow("== Something went wrong. Please try again. ==").red
+        exit 1
       end
 
       def open_project_folder
