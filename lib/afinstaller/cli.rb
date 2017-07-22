@@ -1,12 +1,17 @@
 require 'thor'
 require 'afinstaller'
 require 'afinstaller/installers/Errors/error'
+
 require 'afinstaller/installers/iOS/iOS'
 require 'afinstaller/installers/iOS/iOSBuild'
 require 'afinstaller/installers/Android/android'
 require 'afinstaller/installers/Android/androidBuild'
+
+require 'afinstaller/installers/AF/platform'
 require 'afinstaller/installers/Resi/platform'
+require 'afinstaller/installers/AF/platformBuild'
 require 'afinstaller/installers/Resi/platformBuild'
+
 
 def system!(*args)
   system(*args) || abort(''+red('\n== Command #{args} failed =="')+'')
@@ -112,6 +117,37 @@ module Afinstaller
         end
       else
         error = "Incorrect Platform. Please try afinstaller Resi iOS [version]"
+        Afinstaller::Installers::Error.start([error])
+      end
+    end
+
+
+    method_option :build, :aliases => "-b", :desc => "Build project after cloning repo."
+    desc "AF [Platform] [Version]", "CLI Installer for AF VS"
+    long_desc <<-LONGDESC
+    `afinstaller AF [Platform] [version]` will clone the AF VS [Platform] repo with the version you speicify. It will finally
+    open the project folder after it finishes setting up dependencies.
+
+    Android:
+    You can optionally specify the build flag [-b], which will attempt to run Gradle Clean.
+    This requires Java 8.0 and above.
+
+    iOS:
+    You can optionall specify the build flag [-b], which will attempt to run pod install.
+    This requires cocoapods to be installed. `sudo gem install cocoapods`.
+
+    > $ afinstaller AF [Platofrm] 4.5.0 -b
+    LONGDESC
+    def AF(platform, version)
+      build_project = options[:build]
+      if platform.downcase == "ios" || platform.downcase == "android"
+        if build_project
+          Afinstaller::Installers::AFPlatformBuild.start([version, platform])
+        else
+          Afinstaller::Installers::AFPlatform.start([version, platform])
+        end
+      else
+        error = "Incorrect Platform selected. Please try afinstaller AF iOS [version]"
         Afinstaller::Installers::Error.start([error])
       end
     end

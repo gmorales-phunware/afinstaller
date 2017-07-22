@@ -4,7 +4,10 @@ require 'afinstaller/installers/Errors/error'
 require 'afinstaller/installers/iOS/iOSBuild'
 require 'afinstaller/installers/Android/android'
 require 'afinstaller/installers/Android/androidBuild'
+
+require 'afinstaller/installers/AF/platform'
 require 'afinstaller/installers/Resi/platform'
+require 'afinstaller/installers/AF/platformBuild'
 require 'afinstaller/installers/Resi/platformBuild'
 
 module Afinstaller
