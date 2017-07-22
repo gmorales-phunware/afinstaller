@@ -25,6 +25,10 @@ module Afinstaller
         puts Rainbow("== Attempting Gradle Clean ==").cyan
         system! './gradlew clean :app:assemble$1Debug --parallel --daemon --configure-on-demand -PminSdk=21'
         puts Rainbow("== Gradle successful ==").magenta
+
+      rescue NoMethodError => e
+        puts Rainbow("== Gradle Failed Check your settings. ==").red
+        exit 1
       end
 
       def open_project_folder
