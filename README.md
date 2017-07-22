@@ -6,6 +6,8 @@ AFInstaller is a tool that will clone and install AF projects.
 - Ruby 2.0.0 or above.
 - RubyGems 2.0.0 or above
 
+This gems assumes that you have general knowledge of Ruby, have a ruby manager (rvm or rbenv) or possibly already using homebrew.
+
 ## Installation
 Run the following command on your terminal:
 
