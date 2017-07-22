@@ -42,7 +42,7 @@ module Afinstaller
           system! './gradlew clean :app:assembleDebug --parallel --daemon --configure-on-demand -PminSdk=21'
           puts Rainbow("== Gradle successful ==").magenta
         end
-        
+
       rescue NoMethodError => e
         puts Rainbow("== Something went wrong. Please try again. ==").red
         exit 1
@@ -52,7 +52,7 @@ module Afinstaller
       def build_attmept
         puts Rainbow("== Attempting to build project ==").cyan
         if platform.downcase == "ios"
-          system! 'xcodebuild -scheme GenericResi -workspace GenericResi.xcworkspace/ -sdk iphonesimulator build | xcpretty'
+          system! 'xcodebuild -scheme GenericRESI -workspace GenericRESI.xcworkspace/ -sdk iphonesimulator build | xcpretty'
         else
           system! 'adb install -r app/build/outputs/apk/app-$1-debug.apk'
           system! 'adb shell monkey -p com.phunware.appframework.sample.generic_template.$1 -c android.intent.category.LAUNCHER 1'
