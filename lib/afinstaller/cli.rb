@@ -16,8 +16,8 @@ module Afinstaller
     def self.exit_on_failure?
     true
     end
-    method_option :build, :aliases => "-b", :desc => "Build project after cloning repo."
 
+    method_option :build, :aliases => "-b", :desc => "Build project after cloning repo."
     desc "iOS [version]", "CLI Installer for AF iOS "
     long_desc <<-LONGDESC
     `afinstaller iOS [version]` will clone the AF iOS repo with the version you specify. It will then run `pod install`,
@@ -58,11 +58,43 @@ module Afinstaller
         error = "Incorrect comment. Please try afinstaller help iOS"
         Afinstaller::Installers::Error.start([error])
       end
-      
+
       if build_project
         Afinstaller::Installers::AndroidBuild.start([version])
       else
         Afinstaller::Installers::Android.start([version])
+      end
+    end
+
+
+    method_option :build, :aliases => "-b", :desc => "Build project after cloning repo."
+    desc "Resi [Platform] [Version]", "CLI Installer for AF Resi"
+    long_desc <<-LONGDESC
+    `afinstaller Resi [platform] [version]` will clone the AF Resi [Platform] repo with the version you specify. It will it will
+    finally open the project folder.
+
+    Android:
+    You can optionally specify the build flag [-b], which will attempt to run Gradle Clean.
+    This requires Java 8.0 and above.
+
+    iOS:
+    You can optionally specify the build flag [-b], which will attmept to run pod install.
+    This requires cocoapods to be installed. `sudo gem install cocoapods`
+
+    > $ afinstaller Resi [Platform] 4.5.0 -b
+    LONGDESC
+    def Resi(platform, version)
+      build_project = options[:build]
+      puts "#{platform} #{version}"
+      if platform.downcase == "ios" || platform.downcase == "android"
+        if build_project
+
+        else
+          Afinstaller::Installers::ResiPlatform.start([platform, version])
+        end
+      else
+        error = "Incorrect Platform. Please try afinstaller Resi iOS [version]"
+        Afinstaller::Installers::Error.start([error])
       end
     end
 
