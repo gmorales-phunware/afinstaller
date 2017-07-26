@@ -12,25 +12,19 @@ Gem::Specification.new do |spec|
   spec.email         = ["gmorales@phunware.com"]
 
   spec.summary       = %q{PW's AF iOS and Android Command Line Tool.}
-  spec.description   = %q{Simply Ruby gem to install and build Out of the Box iOS or Android AF projects.}
+  spec.description   = %q{Simple Ruby gem to install and build Out of the Box iOS or Android AF projects.}
   spec.homepage      = "https://rubygems.org/gems/afinstaller"
-  spec.required_rubygems_version = ">= 2.0.0"
 
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  # spec.add_development_dependency "nokogiri", ">= 0"
-  # spec.add_development_dependency "pry", ">= 0"
   spec.add_development_dependency "cucumber"
   spec.add_development_dependency "aruba"
-
 
   spec.add_dependency "thor"
   spec.add_dependency "cocoapods"
   spec.add_runtime_dependency "xcpretty"
   spec.add_dependency "rainbow", ">= 0"
-
-  # spec.add_runtime_dependency(%q<activerecord>, ['>= 3.2', '< 6.0'])
 
   spec.files        = `git ls-files`.split("\n")
   spec.executables   << 'afinstaller'
