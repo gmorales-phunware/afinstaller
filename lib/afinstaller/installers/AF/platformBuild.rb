@@ -38,9 +38,6 @@ module Afinstaller
         else
           FileUtils.cd('af-template-android', :verbose => false)
           puts Rainbow("== Folder is now af-template-android ==").magenta
-          puts Rainbow("== Attempting Gradle Clean ==").cyan
-          system! './gradlew clean :app:assembleDebug --parallel --daemon --configure-on-demand -PminSdk=21'
-          puts Rainbow("== Gradle successful ==").magenta
         end
 
       rescue NoMethodError => e
@@ -54,8 +51,9 @@ module Afinstaller
         if platform.downcase == "ios"
           system! 'xcodebuild -scheme GenericAF4 -workspace GenericAF4.xcworkspace/ -sdk iphonesimulator build | xcpretty'
         else
-          system! 'adb install -r app/build/outputs/apk/app-$1-debug.apk'
-          system! 'adb shell monkey -p com.phunware.appframework.sample.generic_template.$1 -c android.intent.category.LAUNCHER 1'
+          puts Rainbow("== Attempting Gradle Clean ==").cyan
+          system! './gradlew clean :app:assembleDebug --parallel --daemon --configure-on-demand -PminSdk=21'
+          puts Rainbow("== Gradle successful ==").magenta
         end
         puts Rainbow("== Project built successfully ==").magenta
 
